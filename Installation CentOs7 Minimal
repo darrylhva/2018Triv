@@ -1,0 +1,9 @@
+sudo virt-install
+-n sne1 \
+-r 1024 \
+--disk path=/var/lib/libvirt/images/sne1.img,bus=virtio,size=4 \
+-c /home/tjon/ISO/CentOS-7-x86_64-Minimal-1708.iso \
+--network network=default,model=virtio \
+--graphics vnc,listen=0.0.0.0 \
+--noautoconsole \
+-v

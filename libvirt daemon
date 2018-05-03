@@ -1,0 +1,33 @@
+http://manpages.ubuntu.com/manpages/precise/man8/libvirtd.8.html
+
+EXAMPLES
+
+       To retrieve the version of libvirtd:
+
+        # libvirtd --version
+        libvirtd (libvirt) 0.8.2
+        #
+
+       To start libvirtd, instructing it to daemonize and create a PID file:
+
+        # libvirtd -d
+        # ls -la
+        -rw-r--r-- 1 root root 6 Jul  9 02:40
+        #
+
+BUGS
+
+       Please report all bugs you discover.  This should be done via either:
+
+       a) the mailing list
+           <http://libvirt.org/contact.html>
+
+       or,
+
+       b) the bug tracker
+           <http://libvirt.org/bugs.html>
+
+       Alternatively, you may report bugs to your software distributor /
+       vendor.
+
+

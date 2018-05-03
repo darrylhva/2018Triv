@@ -1,0 +1,6 @@
+Hier zitten de images.
+
+/var/lib/libvirt/images
+
+virsh start "image"
+virsh stop "image"

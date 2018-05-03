@@ -1,0 +1,33 @@
+Installatie Tomcat8
+===================
+
+sudo apt install tomcat8
+sudo apt install tomcat8-docs
+sudo apt install tomcat8-examples
+sudo apt install tomcat8-admin
+
+
+Default Tomcat8 directory
+=========================
+
+/etc/tomcat8/Catalina/localhost
+
+Rollen en rechten voor Tomcat Manager and Host beheer
+======================================================
+
+/etc/tomcat8/tomcat-users.xml
+/etc/tomcat8/web.xml
+/etc/tomcat8/server.xml
+/etc/tomcat8/context.xml
+
+Installatie directory voor .war files (inclusief webpaginas)
+============================================================
+/var/lib/tomcat8/webapps
+
+
+FYS project:
+============
+/var/lib/tomcat8/webapps/pfis-1.0
+
+
+

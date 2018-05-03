@@ -1,0 +1,89 @@
+##################### Install Linux Mint 18.2 Cinnamon - 64bit ##########################
+
+Install Linux Mint 18.2 Cinnamon - 64  bit from cd onto harddisk ########################
+
+######################### Checks before Installation of docker ########################## 
+
+# Check that HTTPS transport is available to APT
+if [ ! -e /usr/lib/apt/methods/https ]; then
+	sudo apt-get update
+	sudo apt-get install -y apt-transport-https
+fi
+
+# Add the repository to your APT sources
+sudo echo deb https://get.docker.com/ubuntu docker main > /etc/apt/sources.list.d/docker.list
+
+# Then import the repository key
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 36A1D7869245C8950F966E92D8576A8BA88D21E9
+
+######################### Installation docker ###########################################
+sudo apt-get update
+sudo apt-get install -y docker.io cgroup-lite apparmor
+
+####
+# Alternatively, just use the curl-able install.sh script provided at https://get.docker.com
+####
+
+echo Add group docker to current user
+sudo usermod -a -G docker $USER
+
+#########################################################################################
+
+
+######################### Installation - qemu-kvm ## ####################################
+
+sudo apt install qemu-kvm
+
+######################### Installation - Virt-Manager ###################################
+
+sudo apt install virt-manager
+
+############# ERROR message after starting ¨virt-manager¨ ###############################
+
+Unable to connect to libvirt.
+
+Verify that:
+ - The 'libvirt-bin' package is installed
+ - The 'libvirtd' daemon has been started
+ - You are member of the 'libvirtd' group
+
+################################################################################
+
+####################### Installation of libvirt-bin ############################
+
+sudo apt install libvirt-bin
+
+################################################################################
+
+echo Add group libvirtd to current user
+sudo usermod -a -G libvirtd $USER
+
+################################################################################
+
+################ Install libvirtd daemon #######################################
+
+
+################ qemu-img installation 
+
+Solution: 
+=========
+https://forums.linuxmint.com/viewtopic.php?t=227510
+
+qemu-img is part of qemu-utils.==> sudo apt install qemu-utils
+
+################### Install SpiceClientGtk ######################################
+
+https://velenux.wordpress.com/2016/12/30/how-to-install-and-use-spice-for-vms-in-debian-ubuntu-or-mint/
+
+tjon@HP ~ $ sudo apt-get update
+[sudo] password for tjon:
+tjon@HP ~ $ sudo apt install virt-manager libvirt-daemon python-spice-client-gtk qemu-kvm-spice virt-viewer spice-vdagent qemu-utils  gir1.2-spice-client-gtk-3.0 gir1.2-spice-client-gtk-2.0 gir1.2-spice-client-glib-2.0
+
+############ Ready for use with virt-manager ####################################
+
+virt-manager
+
+#################################################################################
+
+
+

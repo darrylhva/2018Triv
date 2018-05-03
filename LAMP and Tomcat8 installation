@@ -1,0 +1,119 @@
+How to Install LAMP Server on Linux Mint 18 With One Command
+=============================================================
+
+https://www.storagecraft.com/blog/install-lamp-server-linux-mint-18-command/
+
+
+
+Step 1: Update Linux
+====================
+
+For the best results, it’s a good idea to update your OS first. There are a few ways to do this, but we’re gonna fire up the Terminal and enter the following command:
+
+sudo apt-get update && sudo apt-get dist-upgrade -y
+
+Next you’ll be prompted for a password. Take note that you won’t see anything when entering your password in the command line. Don’t freak out (like I did). This is for security purposes. Just go ahead, type it and press Enter.
+
+We want to make sure the changes from the update take effect so we’ll restart our system with the following command:
+
+sudo reboot
+
+
+Step 2: Install the LAMP Server
+===============================
+
+Once our system reboots, we’ll head back to the Terminal and start the installation process by entering the following command:
+
+sudo apt-get install lamp-server^ -y
+
+
+Step. 3: Setup MySQL
+====================
+
+Immediately after the installation you’ll be need to configure MySQL. All you have to do here is enter a password for the root account. This step is optional, but I recommend it since you’ll need that password to add new users and handle other database management tasks. Enter your desired password, enter it a second time to confirm, and you’re done.
+
+That’s it! This one command will successfully install the LAMP server stack in its entirety. For the remainder of this guide we’ll work on some configurations and testing to make sure everything is up to speed.
+
+
+Step 4: Test Apache
+===================
+
+The easiest way to make sure the installation went according to plan is to test our Apache web server. We can do this by simply opening a web browser and enter the following URL:
+
+http://localhost
+
+If all goes well you’ll see the default page for Apache in your browser.
+
+
+
+Step 5: Test PHP
+================
+
+The “P” in the LAMP server stands for PHP, so we’ll run a quick test to make sure this language package is properly installed. We’ll do this by creating a simple PHP script we’re gonna call “info.php”. To do this, navigate back to the Terminal and enter the following command:
+
+sudo nano /var/www/info.php
+
+Next, copy and paste the following code in the Terminal:
+
+<?php phpinfo(); ?>
+
+Hold down “CTRL” and “O” to write-out and save the file, then press “CTRL” and “X” to escape.
+
+To make sure the changes take effect, let’s restart Apache by entering the following command:
+
+sudo service apache2 restart
+
+And to make sure all is right with PHP, we’ll navigate to our browser and enter the following URL:
+
+http://localhost/info.php
+
+What you see are essentially the PHP-based specs of your LAMP server.
+
+Note: Different versions of Linux store files in different folders by default. If the PHP test throws a browser error, you probably need to investigate and find out exactly where the test file is stored.
+
+
+Install PHPMyAdmin
+==================
+
+MySQL is great, but without a basic knowledge of SQL commands, database management is going to be a chore to say the least. Luckily a more user-friendly alternative exists in PHPMyAdmin. Though it’s not a part of the stack, PHPMyAdmin simplifies MySQL database management and thanks to an intuitive GUI, is one of the best tools for the job.
+
+We can install PHPMyAdmin by entering the following command:
+
+sudo apt-get install phpmyadmin -y
+
+On the next screen you will choose the web server you want to automatically configure to run PHPMyAdmin. Select “Apache 2” and hit Enter.
+
+Next, you’ll set up a default database for PHPMyAdmin. Choose ‘Yes’ and press ‘Enter’ to proceed to the next step.
+
+From there you will enter a password for the administrative account associated with your default database. Since there’s only one root user, we’ll enter the password we created for MySQL earlier.
+
+On the very next screen we will create a password specifically to use with PHPMyAdmin. Confirm it and we’re done.
+
+After setting up our database management tool we’ll restart Apache to make sure all changes take effect. Once Apache reboots, we’ll check to see if PHPMyAdmin is working properly. To do that, let’s head back to our browser and enter the following URL:
+
+http://localhost/phpmyadmin
+
+
+PHPMyAdmin Error Troubleshooting
+================================
+
+If all went well you’ll see a gorgeously clean interface welcoming you to PHPMyAdmin. To login, simply enter “root” as the Username and the root password for MySQL. Once logged in you can play around by creating databases and adding new users.
+
+Note: If your PHPMyAdmin test is resulting in error, it’s probably because Apache is looking for it in the wrong directory. For example, my PHPMyAdmin installation was in the “WWW” folder when it should’ve been in “HTML”. This goes back to different versions of Linux storing files in different locations.
+
+If moving files around in the Terminal gives you anxiety, don’t worry. You can address this right from the desktop. Simply open the File System, navigate to “WWW”, and right-click to open as the root user. With your Elevated Privileges you can copy the PHPMyAdmin folder and paste it in the HTML directory. The URL above should now take you right to the PHPMyAdmin interface. Took me hours to figure this out. Some superuser I am. Haha.
+
+
+Installatie Tomcat8
+===================
+
+sudo apt install tomcat8
+sudo apt install tomcat8-docs
+sudo apt install tomcat8-examples
+sudo apt install tomcat8-admin
+
+
+
+
+
+

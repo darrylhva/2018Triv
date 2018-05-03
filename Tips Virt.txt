@@ -1,0 +1,6 @@
+Belangrijk:
+- Design, en verbeterpunten
+- guacamole van Apache (HTTPS met certificate). Lets encrypt voor de web interface.
+- HTML frontend en Node.js
+- Functionele achter de werking is belangrijker dan het esthetische
+- Django (python tool voor WEB development)

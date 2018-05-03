@@ -1,0 +1,174 @@
+Foutmelding na proberen VM met qemu-KVM.
+
+Unable to complete install: 'Couldn't create storage volume 'RaspBian.qcow2': 'internal error: creation of non-raw images is not supported without qemu-img''
+
+Traceback (most recent call last):
+  File "/usr/share/virt-manager/virtManager/asyncjob.py", line 90, in cb_wrapper
+    callback(asyncjob, *args, **kwargs)
+  File "/usr/share/virt-manager/virtManager/create.py", line 2273, in _do_async_install
+    guest.start_install(meter=meter)
+  File "/usr/share/virt-manager/virtinst/guest.py", line 487, in start_install
+    dev.setup(meter)
+  File "/usr/share/virt-manager/virtinst/devicedisk.py", line 861, in setup
+    vol_object = self._storage_backend.create(meter)
+  File "/usr/share/virt-manager/virtinst/diskbackend.py", line 439, in create
+    return self._vol_install.install(meter=progresscb)
+  File "/usr/share/virt-manager/virtinst/storage.py", line 809, in install
+    "'%s': '%s'" % (self.name, str(e)))
+RuntimeError: Couldn't create storage volume 'RaspBian.qcow2': 'internal error: creation of non-raw images is not supported without qemu-img'
+
+Solution: 
+=========
+https://forums.linuxmint.com/viewtopic.php?t=227510
+
+qemu-img is part of qemu-utils.==> sudo apt install qemu-utils
+
+tjon@HP ~ $ sudo apt install qemu-utils
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+Suggested packages:
+  debootstrap
+Recommended packages:
+  sharutils
+The following NEW packages will be installed:
+  qemu-utils
+0 upgraded, 1 newly installed, 0 to remove and 337 not upgraded.
+Need to get 579 kB of archives.
+After this operation, 3536 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 qemu-utils amd64 1:2.5+dfsg-5ubuntu10.16 [579 kB]
+Fetched 579 kB in 0s (4164 kB/s)   
+Selecting previously unselected package qemu-utils.
+(Reading database ... 202450 files and directories currently installed.)
+Preparing to unpack .../qemu-utils_1%3a2.5+dfsg-5ubuntu10.16_amd64.deb ...
+Unpacking qemu-utils (1:2.5+dfsg-5ubuntu10.16) ...
+Processing triggers for man-db (2.7.5-1) ...
+Setting up qemu-utils (1:2.5+dfsg-5ubuntu10.16) ...
+
+
+Foutmelding:
+Error connecting to graphical console:
+Error opening Spice console, SpiceClientGtk missing
+
+Install Spice Client Gtk
+https://velenux.wordpress.com/2016/12/30/how-to-install-and-use-spice-for-vms-in-debian-ubuntu-or-mint/
+
+# apt-get update
+# apt-get install virt-manager libvirt-daemon python-spice-client-gtk qemu-kvm-spice virt-viewer spice-vdagent qemu-utils  gir1.2-spice-client-gtk-3.0 gir1.2-spice-client-gtk-2.0 gir1.2-spice-client-glib-2.0
+
+tjon@HP ~ $ sudo apt-get update
+[sudo] password for tjon: 
+Hit:1 http://archive.ubuntu.com/ubuntu xenial InRelease
+Hit:2 http://security.ubuntu.com/ubuntu xenial-security InRelease              
+Hit:3 http://archive.canonical.com/ubuntu xenial InRelease                     
+Hit:4 http://archive.ubuntu.com/ubuntu xenial-updates InRelease                
+Hit:5 http://archive.ubuntu.com/ubuntu xenial-backports InRelease              
+Ign:6 https://get.docker.com/ubuntu docker InRelease                           
+Hit:7 https://get.docker.com/ubuntu docker Release 
+Ign:8 http://packages.linuxmint.com sonya InRelease
+Hit:9 http://packages.linuxmint.com sonya Release  
+Reading package lists... Done                     
+W: https://get.docker.com/ubuntu/dists/docker/Release.gpg: Signature by key 36A1D7869245C8950F966E92D8576A8BA88D21E9 uses weak digest algorithm (SHA1)
+tjon@HP ~ $ sudo apt install virt-manager libvirt-daemon python-spice-client-gtk qemu-kvm-spice virt-viewer spice-vdagent qemu-utils  gir1.2-spice-client-gtk-3.0 gir1.2-spice-client-gtk-2.0 gir1.2-spice-client-glib-2.0
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+Note, selecting 'libvirt-bin' instead of 'libvirt-daemon'
+Note, selecting 'qemu-kvm' instead of 'qemu-kvm-spice'
+libvirt-bin is already the newest version (1.3.1-1ubuntu10.15).
+qemu-kvm is already the newest version (1:2.5+dfsg-5ubuntu10.16).
+qemu-utils is already the newest version (1:2.5+dfsg-5ubuntu10.16).
+virt-manager is already the newest version (1:1.3.2-3ubuntu1.16.04.4).
+The following additional packages will be installed:
+  gir1.2-gtk-2.0 libspice-client-glib-2.0-8 libspice-client-gtk-2.0-4
+  libspice-client-gtk-3.0-4 libusbredirhost1 spice-client-glib-usb-acl-helper
+The following NEW packages will be installed:
+  gir1.2-gtk-2.0 gir1.2-spice-client-glib-2.0 gir1.2-spice-client-gtk-2.0
+  gir1.2-spice-client-gtk-3.0 libspice-client-glib-2.0-8
+  libspice-client-gtk-2.0-4 libspice-client-gtk-3.0-4 libusbredirhost1
+  python-spice-client-gtk spice-client-glib-usb-acl-helper spice-vdagent
+  virt-viewer
+0 upgraded, 12 newly installed, 0 to remove and 337 not upgraded.
+Need to get 846 kB of archives.
+After this operation, 4952 kB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 gir1.2-gtk-2.0 amd64 2.24.30-1ubuntu1.16.04.2 [172 kB]
+Get:2 http://archive.ubuntu.com/ubuntu xenial/main amd64 libusbredirhost1 amd64 0.7.1-1 [17,6 kB]
+Get:3 http://archive.ubuntu.com/ubuntu xenial/universe amd64 spice-client-glib-usb-acl-helper amd64 0.30-1 [10,1 kB]
+Get:4 http://archive.ubuntu.com/ubuntu xenial/universe amd64 libspice-client-glib-2.0-8 amd64 0.30-1 [298 kB]
+Get:5 http://archive.ubuntu.com/ubuntu xenial/universe amd64 gir1.2-spice-client-glib-2.0 amd64 0.30-1 [11,1 kB]
+Get:6 http://archive.ubuntu.com/ubuntu xenial/universe amd64 libspice-client-gtk-2.0-4 amd64 0.30-1 [37,5 kB]
+Get:7 http://archive.ubuntu.com/ubuntu xenial/universe amd64 gir1.2-spice-client-gtk-2.0 amd64 0.30-1 [5716 B]
+Get:8 http://archive.ubuntu.com/ubuntu xenial/universe amd64 libspice-client-gtk-3.0-4 amd64 0.30-1 [38,0 kB]
+Get:9 http://archive.ubuntu.com/ubuntu xenial/universe amd64 gir1.2-spice-client-gtk-3.0 amd64 0.30-1 [5712 B]
+Get:10 http://archive.ubuntu.com/ubuntu xenial/universe amd64 python-spice-client-gtk amd64 0.30-1 [14,2 kB]
+Get:11 http://archive.ubuntu.com/ubuntu xenial/universe amd64 spice-vdagent amd64 0.15.0-1.3 [43,5 kB]
+Get:12 http://archive.ubuntu.com/ubuntu xenial/universe amd64 virt-viewer amd64 1.0-1 [193 kB]
+Fetched 846 kB in 0s (4608 kB/s)       
+Selecting previously unselected package gir1.2-gtk-2.0.
+(Reading database ... 202465 files and directories currently installed.)
+Preparing to unpack .../gir1.2-gtk-2.0_2.24.30-1ubuntu1.16.04.2_amd64.deb ...
+Unpacking gir1.2-gtk-2.0 (2.24.30-1ubuntu1.16.04.2) ...
+Selecting previously unselected package libusbredirhost1:amd64.
+Preparing to unpack .../libusbredirhost1_0.7.1-1_amd64.deb ...
+Unpacking libusbredirhost1:amd64 (0.7.1-1) ...
+Selecting previously unselected package spice-client-glib-usb-acl-helper.
+Preparing to unpack .../spice-client-glib-usb-acl-helper_0.30-1_amd64.deb ...
+Unpacking spice-client-glib-usb-acl-helper (0.30-1) ...
+Selecting previously unselected package libspice-client-glib-2.0-8:amd64.
+Preparing to unpack .../libspice-client-glib-2.0-8_0.30-1_amd64.deb ...
+Unpacking libspice-client-glib-2.0-8:amd64 (0.30-1) ...
+Selecting previously unselected package gir1.2-spice-client-glib-2.0.
+Preparing to unpack .../gir1.2-spice-client-glib-2.0_0.30-1_amd64.deb ...
+Unpacking gir1.2-spice-client-glib-2.0 (0.30-1) ...
+Selecting previously unselected package libspice-client-gtk-2.0-4:amd64.
+Preparing to unpack .../libspice-client-gtk-2.0-4_0.30-1_amd64.deb ...
+Unpacking libspice-client-gtk-2.0-4:amd64 (0.30-1) ...
+Selecting previously unselected package gir1.2-spice-client-gtk-2.0.
+Preparing to unpack .../gir1.2-spice-client-gtk-2.0_0.30-1_amd64.deb ...
+Unpacking gir1.2-spice-client-gtk-2.0 (0.30-1) ...
+Selecting previously unselected package libspice-client-gtk-3.0-4:amd64.
+Preparing to unpack .../libspice-client-gtk-3.0-4_0.30-1_amd64.deb ...
+Unpacking libspice-client-gtk-3.0-4:amd64 (0.30-1) ...
+Selecting previously unselected package gir1.2-spice-client-gtk-3.0.
+Preparing to unpack .../gir1.2-spice-client-gtk-3.0_0.30-1_amd64.deb ...
+Unpacking gir1.2-spice-client-gtk-3.0 (0.30-1) ...
+Selecting previously unselected package python-spice-client-gtk.
+Preparing to unpack .../python-spice-client-gtk_0.30-1_amd64.deb ...
+Unpacking python-spice-client-gtk (0.30-1) ...
+Selecting previously unselected package spice-vdagent.
+Preparing to unpack .../spice-vdagent_0.15.0-1.3_amd64.deb ...
+Unpacking spice-vdagent (0.15.0-1.3) ...
+Selecting previously unselected package virt-viewer.
+Preparing to unpack .../virt-viewer_1.0-1_amd64.deb ...
+Unpacking virt-viewer (1.0-1) ...
+Processing triggers for libc-bin (2.23-0ubuntu7) ...
+Processing triggers for man-db (2.7.5-1) ...
+Processing triggers for systemd (229-4ubuntu17) ...
+Processing triggers for ureadahead (0.100.0-19) ...
+ureadahead will be reprofiled on next reboot
+Processing triggers for gnome-menus (3.13.3-6ubuntu3.1) ...
+Processing triggers for desktop-file-utils (0.22+linuxmint1) ...
+Processing triggers for mime-support (3.59ubuntu1) ...
+Processing triggers for shared-mime-info (1.5-2ubuntu0.1) ...
+Processing triggers for hicolor-icon-theme (0.15-0ubuntu1) ...
+Setting up gir1.2-gtk-2.0 (2.24.30-1ubuntu1.16.04.2) ...
+Setting up libusbredirhost1:amd64 (0.7.1-1) ...
+Setting up spice-client-glib-usb-acl-helper (0.30-1) ...
+Setting up libspice-client-glib-2.0-8:amd64 (0.30-1) ...
+Setting up gir1.2-spice-client-glib-2.0 (0.30-1) ...
+Setting up libspice-client-gtk-2.0-4:amd64 (0.30-1) ...
+Setting up gir1.2-spice-client-gtk-2.0 (0.30-1) ...
+Setting up libspice-client-gtk-3.0-4:amd64 (0.30-1) ...
+Setting up gir1.2-spice-client-gtk-3.0 (0.30-1) ...
+Setting up python-spice-client-gtk (0.30-1) ...
+Setting up spice-vdagent (0.15.0-1.3) ...
+spice-vdagentd.target is a disabled or a static unit, not starting it.
+Setting up virt-viewer (1.0-1) ...
+update-alternatives: using /usr/bin/spice-xpi-client-remote-viewer to provide /usr/bin/spice-xpi-client (spice-xpi-client) in auto mode
+Processing triggers for libc-bin (2.23-0ubuntu7) ...
+Processing triggers for systemd (229-4ubuntu17) ...
+Processing triggers for ureadahead (0.100.0-19) ...
+
+
+
