@@ -6,13 +6,14 @@ def libvirtConnect():
     conn = libvirt.open('qemu:///system')
   except libvirt.libvirtError:
     conn = None
+
   return conn
 
 def defineKVMInstance(template):
-  conn = defineKVMInstance(template):
+  conn = libvirtConnect()
 
   if conn == None:
-    return HTTPResponse(status=500, body=Error defining instance\n')
+    return HTTPResponse(status=500, body='Error defining instance\n')
   else:
     try:
       conn.defineXML(template)
@@ -103,9 +104,9 @@ def getLibvirtInstance():
 def list():
   kvm_list = getLibvirtInstance()
 
-  return "List of KVM instances: {}\n'.format(kvm_list)
+  return "List of KVM instances: {}\n".format(kvm_list)
 
-run(host='locolhost', port=8080, debug=True)
+run(host='localhost', port=8181, debug=True)
 
  
  
